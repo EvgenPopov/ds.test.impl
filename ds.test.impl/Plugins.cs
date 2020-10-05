@@ -17,10 +17,17 @@ namespace ds.test.impl
     /// </summary>
     public class Plugins
     {
+        
         private PluginSingleton plugins;
+        
+
 
         public Plugins(string name)
         {
+            if(plugins!=null)
+            {
+                plugins = PluginSingleton.DeleteInstance();
+            };
             plugins = PluginSingleton.GetInstance(name);
             PluginName = plugins.GetPlugin(name).PluginName;
             Version = plugins.GetPlugin(name).Version;
@@ -36,9 +43,17 @@ namespace ds.test.impl
         /// directly the run method itself, which, when specifying the name of the plugin, will perform this operation.
         /// can be used statically. For example : Console.WriteLine(Plugins.Run("Multiplication", 1, 2));
         /// </summary>
-        public static int Run(string name, int FirstValue, int secondValue)
+        public static int Run(string name, int FirstValue, int SecondValue)
         {
-            return PluginSingleton.GetInstance(name, FirstValue, secondValue).Run();
+            var plugNow = PluginSingleton.GetInstance(name, FirstValue, SecondValue);
+
+            int value = plugNow.Run();
+
+            plugNow = PluginSingleton.DeleteInstance();
+
+            return value;
+            
+           
         }
     }
 }

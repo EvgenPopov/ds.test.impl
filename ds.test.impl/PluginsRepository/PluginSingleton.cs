@@ -34,7 +34,7 @@ namespace ds.test.impl.PluginsRepository
         /// </summary>
         private static List<AbstractionPlugin> ListOfPlugins = new List<AbstractionPlugin>()
         {
-            new AdditionPlugin(), new SubtractionPlugin(), new DivisionPlugin(), new MultiplicationnPlugin()
+            new AdditionPlugin(), new SubtractionPlugin(), new DivisionPlugin(), new MultiplicationPlugin()
 
         };
 
@@ -105,6 +105,17 @@ namespace ds.test.impl.PluginsRepository
 
             return instance;
         }
+
+
+        /// <summary>
+        /// Process of deleting instance for recreation object
+        /// </summary>
+        /// <returns></returns>
+        public static PluginSingleton DeleteInstance()
+        {
+           return instance = null;
+        }
+        
 
         /// <summary>
         /// returns the interface specified in the plugin nameUsing it, we can get the RUN method
